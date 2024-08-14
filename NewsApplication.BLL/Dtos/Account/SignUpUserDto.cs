@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using NewsApplication.DAL.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace NewsApplication.BLL.Dtos.Account
 {
@@ -27,5 +30,7 @@ namespace NewsApplication.BLL.Dtos.Account
         [Required(ErrorMessage = "Date Of Birth is required.")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
+        [Required(ErrorMessage = "User Category is required.")]
+        public UserCategory UserCategory { get; set; }
     }
 }

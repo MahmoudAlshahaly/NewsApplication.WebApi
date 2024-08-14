@@ -23,7 +23,7 @@ namespace NewsApplication.DAL.Models
         [Required]
         public string ImageURL { get; set; }
         public bool IsDeleted { get; set; } = false;
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }
 }

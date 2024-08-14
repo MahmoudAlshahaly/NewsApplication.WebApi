@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NewsApplication.BLL.Dtos.Account;
+using NewsApplication.BLL.Dtos.News;
 using NewsApplication.BLL.Managers.AccountManager;
 
 namespace NewsApplication.Api.Controllers
@@ -15,27 +16,69 @@ namespace NewsApplication.Api.Controllers
             _accountManager = accountManager;
         }
         [HttpPost("RegisterAsync")]
-        public async Task<ActionResult<TokenDataDto>> RegisterAsync([FromBody] SignUpUserDto model)
+        public async Task<ActionResult<TokenDataDto>> RegisterAsync([FromForm] SignUpUserDto model)
         {
             var result = await _accountManager.RegisterUser(model);
 
             if (result is null)
                 return BadRequest(result);
 
+            SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
+
             return Ok(result);
         }
         [HttpPost("LoginAsync")]
-        public async Task<ActionResult<TokenDataDto>> LoginAsync([FromBody] LoginUserDto model)
+        public async Task<ActionResult<TokenDataDto>> LoginAsync([FromForm] LoginUserDto model)
         {
             var result = await _accountManager.LoginUser(model);
 
             if (result is null)
                 return BadRequest(result);
 
+            if (!string.IsNullOrEmpty(result.RefreshToken))
+                SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
+
             return Ok(result);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateUserDto>> Update(string id, [FromForm] UpdateUserDto model)
+        {
+            try
+            {
+                if (id != model.Id)
+                {
+                    return NotFound("Not Matches Keys");
+                }
+
+                var updateUser = await _accountManager.UpdateUser(model);
+                if (updateUser == null)
+                {
+                    return NotFound("user not found.");
+                }
+
+                return Ok(updateUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            try
+            {
+                await _accountManager.DeleteAsync(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpPost("AddRoleAsync")]
-        public async Task<IActionResult> AddRoleAsync([FromBody] AddRoleDto model)
+        public async Task<IActionResult> AddRoleAsync([FromForm] AddRoleDto model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -53,13 +96,15 @@ namespace NewsApplication.Api.Controllers
             var refreshToken = Request.Cookies["refreshToken"];
             var result = await _accountManager.RefreshTokenAsync(refreshToken);
 
+            if(result.Token == null)
+                return BadRequest(result);
+            
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
 
             return Ok(result);
         }
-
         [HttpPost("RevokeToken")]
-        public async Task<IActionResult> RevokeToken([FromBody] RevokeTokenDto model)
+        public async Task<IActionResult> RevokeToken([FromForm] RevokeTokenDto model)
         {
             var token = model.Token ?? Request.Cookies["refreshToken"];
 

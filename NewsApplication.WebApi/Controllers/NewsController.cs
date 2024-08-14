@@ -8,7 +8,8 @@ namespace NewsApplication.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Normal")]
+    [Authorize]
+    //[Authorize(Roles = "Normal")]
     //[Authorize(Roles = "Admin")]
     //[Authorize(Roles = "ContentAdmin")]
     public class NewsController : ControllerBase
@@ -19,7 +20,7 @@ namespace NewsApplication.Api.Controllers
             _newsManager = newsManager;
         }
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ReadNewsDto>>> GetAll()
         {
             return Ok(await _newsManager.GetAllAsync());

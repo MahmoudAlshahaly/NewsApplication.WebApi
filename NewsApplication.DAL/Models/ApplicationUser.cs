@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace NewsApplication.DAL.Models
 {
@@ -20,7 +21,6 @@ namespace NewsApplication.DAL.Models
         [Required , DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         [Required]
-        public UserCategory UserCategory { get; set; } = UserCategory.Normal;
         public bool IsDeleted { get; set; } = false;
         public List<RefreshToken> RefreshTokens { get; set; }
         public ICollection<News> News { get; set; } = new HashSet<News>();

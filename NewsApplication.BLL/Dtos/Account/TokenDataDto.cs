@@ -12,10 +12,10 @@ namespace NewsApplication.BLL.Dtos.Account
     {
         public string Token { get; set; }
         public string UserId { get; set; }
-        public string Message { get; set; }
-        public UserCategory UserCategory { get; set; }
+        public string Message { get; set; } = "Success";
         public List<string>? Roles { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
         [JsonIgnore]
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpiration { get; set; }

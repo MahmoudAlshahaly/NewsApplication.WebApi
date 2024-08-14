@@ -12,8 +12,8 @@ using NewsApplication.DAL.DbContext;
 namespace NewsApplication.DAL.Migrations
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20240811212102_init")]
-    partial class init
+    [Migration("20240813231845_addroles")]
+    partial class addroles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,23 @@ namespace NewsApplication.DAL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cd30616a-b07c-4fbd-80b7-46b53431ae75",
+                            Name = "Normal"
+                        },
+                        new
+                        {
+                            Id = "7b5302c9-304f-462a-828a-645d818176d1",
+                            Name = "ContentAdmin"
+                        },
+                        new
+                        {
+                            Id = "97da9636-9b67-4378-8a82-190ea1ed5030",
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -240,10 +257,8 @@ namespace NewsApplication.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId1")
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -276,7 +291,7 @@ namespace NewsApplication.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("News");
                 });
@@ -332,11 +347,50 @@ namespace NewsApplication.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NewsApplication.DAL.Models.ApplicationUser", b =>
+                {
+                    b.OwnsMany("NewsApplication.DAL.Models.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<string>("ApplicationUserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<DateTime>("CreatedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("ExpiresOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("RevokedOn")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ApplicationUserId", "Id");
+
+                            b1.ToTable("RefreshToken");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ApplicationUserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
+                });
+
             modelBuilder.Entity("NewsApplication.DAL.Models.News", b =>
                 {
                     b.HasOne("NewsApplication.DAL.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("News")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
                 });

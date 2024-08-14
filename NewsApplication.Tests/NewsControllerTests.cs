@@ -25,14 +25,14 @@ namespace NewsApplication.Tests
             _fixture = new Fixture();
             _mockFormFile = new Mock<IFormFile>();
 
-            var fakeToken = "Bearer your-jwt-token"; // Replace with your actual token logic
+            var fakeToken = "Bearer your-jwt-token"; 
             _newsController.ControllerContext = new ControllerContext
             {
                 HttpContext = new DefaultHttpContext
                 {
                     User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
                     {
-                         new Claim(ClaimTypes.NameIdentifier, "1") // Example User ID
+                         new Claim(ClaimTypes.NameIdentifier, "1") //User ID
                     })),
                     Request =
                     {

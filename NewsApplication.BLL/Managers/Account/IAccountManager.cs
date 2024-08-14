@@ -10,7 +10,7 @@ namespace NewsApplication.BLL.Managers.AccountManager
         Task<TokenDataDto> RefreshTokenAsync(string token);
         Task<bool> RevokeTokenAsync(string token);
         Task<UpdateUserDto> UpdateUser(UpdateUserDto updateDTO);
-        Task LogoutUser();
+        //Task LogoutUser();
         Task DeleteAsync(string id);
     }
 }

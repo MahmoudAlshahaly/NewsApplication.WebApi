@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shipping.BLL.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsApplication.BLL.Services
 {
@@ -19,7 +14,8 @@ namespace NewsApplication.BLL.Services
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1)); // Run every 24 hours
+            // Run every one minute
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1)); 
             return Task.CompletedTask;
         }
         public Task StopAsync(CancellationToken cancellationToken)
@@ -32,21 +28,13 @@ namespace NewsApplication.BLL.Services
             using (var scope = _serviceProvider.CreateScope())
             {
                 var newsManager = scope.ServiceProvider.GetRequiredService<INewsManager>();
-                newsManager.SoftDeleteExpiredNewsAsync(DateTime.Now).Wait();// Call the method to soft delete expired news
+                // Call the method to soft delete expired news
+                newsManager.SoftDeleteExpiredNewsAsync(DateTime.Now).Wait();
             }
         }
         public void Dispose()
         {
             _timer?.Dispose();
         }
-        //protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        //{
-        //    while (!stoppingToken.IsCancellationRequested)
-        //    {
-        //        await _newsManager.SoftDeleteExpiredNewsAsync(DateTime.Now);
-        //        await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken); // Run daily
-        //    }
-        //}
     }
-
 }

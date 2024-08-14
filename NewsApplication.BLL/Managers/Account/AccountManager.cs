@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using NewsApplication.BLL.Dtos.Account;
 using NewsApplication.DAL.Models;
 using NewsApplication.DAL.Repositories;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -49,10 +49,13 @@ namespace NewsApplication.BLL.Managers.AccountManager
             }
             string token = await GenerateToken(user);
 
+            var rolesList = await _userManager.GetRolesAsync(user);
+
             tokenData.UserName = user.UserName;
-            tokenData.UserId=user.Id;
+            tokenData.Email = user.Email;
+            tokenData.UserId = user.Id;
             tokenData.Token = token;
-            tokenData.UserCategory = user.UserCategory;
+            tokenData.Roles = rolesList.ToList();
 
             if (user.RefreshTokens.Any(t => t.IsActive))
             {
@@ -90,8 +93,11 @@ namespace NewsApplication.BLL.Managers.AccountManager
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role,user.UserCategory.ToString())
+                new Claim(ClaimTypes.Role,entity.UserCategory.ToString())
             };
+
+            await _userManager.AddToRoleAsync(user, entity.UserCategory.ToString());
+
             await _userManager.AddClaimsAsync(user, claims);
 
             string token = await GenerateToken(user);
@@ -102,8 +108,9 @@ namespace NewsApplication.BLL.Managers.AccountManager
             {
                 UserId = user.Id,
                 UserName = user.UserName,
-                UserCategory = user.UserCategory,
+                Email = user.Email,
                 Token = token,
+                Roles = new List<string> { entity.UserCategory.ToString() },
                 RefreshToken = refreshToken.Token,
                 RefreshTokenExpiration = refreshToken.ExpiresOn
             };
@@ -122,10 +129,10 @@ namespace NewsApplication.BLL.Managers.AccountManager
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenString;
         }
-        public async Task LogoutUser()
-        {
-            await _signInManager.SignOutAsync();
-        }
+        //public async Task LogoutUser()
+        //{
+        //    await _signInManager.SignOutAsync();
+        //}
         public async Task<UpdateUserDto> UpdateUser(UpdateUserDto entity)
         {
             var user = await _userManager.FindByIdAsync(entity.Id);
@@ -156,17 +163,16 @@ namespace NewsApplication.BLL.Managers.AccountManager
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
 
-            if (user is null || !await _roleManager.RoleExistsAsync(model.Role))
+            if (user is null || !await _roleManager.RoleExistsAsync(model.Role.ToString()))
                 return "Invalid user ID or Role";
 
-            if (await _userManager.IsInRoleAsync(user, model.Role))
+            if (await _userManager.IsInRoleAsync(user, model.Role.ToString()))
                 return "User already assigned to this role";
 
-            var result = await _userManager.AddToRoleAsync(user, model.Role);
+            var result = await _userManager.AddToRoleAsync(user, model.Role.ToString());
 
             return result.Succeeded ? string.Empty : "Something went wrong";
         }
-
         public async Task<TokenDataDto> RefreshTokenAsync(string token)
         {
             var tokenData = new TokenDataDto();
@@ -193,9 +199,12 @@ namespace NewsApplication.BLL.Managers.AccountManager
             user.RefreshTokens.Add(newRefreshToken);
             await _userManager.UpdateAsync(user);
 
+            var rolesList = await _userManager.GetRolesAsync(user);
+            tokenData.Roles = rolesList.ToList();
             tokenData.Token = await GenerateToken(user);
+            tokenData.UserId = user.Id;
             tokenData.UserName = user.UserName;
-            tokenData.UserCategory = user.UserCategory;
+            tokenData.Email = user.Email;
             tokenData.RefreshToken = newRefreshToken.Token;
             tokenData.RefreshTokenExpiration = newRefreshToken.ExpiresOn;
 
@@ -212,7 +221,7 @@ namespace NewsApplication.BLL.Managers.AccountManager
             return new RefreshToken
             {
                 Token = Convert.ToBase64String(randomNumber),
-                ExpiresOn = DateTime.UtcNow.AddDays(10),
+                ExpiresOn = DateTime.UtcNow.AddDays(1),
                 CreatedOn = DateTime.UtcNow
             };
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewsApplication.DAL.DbContext;
 
@@ -11,9 +12,11 @@ using NewsApplication.DAL.DbContext;
 namespace NewsApplication.DAL.Migrations
 {
     [DbContext(typeof(NewsContext))]
-    partial class NewsContextModelSnapshot : ModelSnapshot
+    [Migration("20240813230058_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,23 +50,6 @@ namespace NewsApplication.DAL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "cd30616a-b07c-4fbd-80b7-46b53431ae75",
-                            Name = "Normal"
-                        },
-                        new
-                        {
-                            Id = "7b5302c9-304f-462a-828a-645d818176d1",
-                            Name = "ContentAdmin"
-                        },
-                        new
-                        {
-                            Id = "97da9636-9b67-4378-8a82-190ea1ed5030",
-                            Name = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

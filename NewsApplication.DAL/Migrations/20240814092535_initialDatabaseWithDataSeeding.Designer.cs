@@ -12,8 +12,8 @@ using NewsApplication.DAL.DbContext;
 namespace NewsApplication.DAL.Migrations
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20240813231845_addroles")]
-    partial class addroles
+    [Migration("20240814092535_initialDatabaseWithDataSeeding")]
+    partial class initialDatabaseWithDataSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,18 +54,21 @@ namespace NewsApplication.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cd30616a-b07c-4fbd-80b7-46b53431ae75",
-                            Name = "Normal"
+                            Id = "NR1",
+                            Name = "Normal",
+                            NormalizedName = "NORMAL"
                         },
                         new
                         {
-                            Id = "7b5302c9-304f-462a-828a-645d818176d1",
-                            Name = "ContentAdmin"
+                            Id = "CAR2",
+                            Name = "ContentAdmin",
+                            NormalizedName = "CONTENTADMIN "
                         },
                         new
                         {
-                            Id = "97da9636-9b67-4378-8a82-190ea1ed5030",
-                            Name = "Admin"
+                            Id = "AR3",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -154,6 +157,23 @@ namespace NewsApplication.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "AU3",
+                            RoleId = "AR3"
+                        },
+                        new
+                        {
+                            UserId = "NU1",
+                            RoleId = "NR1"
+                        },
+                        new
+                        {
+                            UserId = "CAU2",
+                            RoleId = "CAR2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -229,9 +249,6 @@ namespace NewsApplication.DAL.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserCategory")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -247,6 +264,62 @@ namespace NewsApplication.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "AU3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "39aad86d-6370-4a84-a5ed-2d9e65a9de99",
+                            DateOfBirth = new DateTime(2000, 8, 14, 9, 25, 35, 185, DateTimeKind.Utc).AddTicks(3632),
+                            Email = "mahmoud@domain.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MAHMOUD@DOMAIN.COM",
+                            NormalizedUserName = "MAHMOUD",
+                            PasswordHash = "AQAAAAIAAYagAAAAECPGh2D5kLWCTzTCSY5T+MITtw2SqF0a++f6QCTp3OkImaSFiHyBLkIhfToBN76eCQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "mahmoud"
+                        },
+                        new
+                        {
+                            Id = "CAU2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "eab6c785-a0e4-44de-94b1-0fcfa2ff6eea",
+                            DateOfBirth = new DateTime(1999, 8, 14, 9, 25, 35, 290, DateTimeKind.Utc).AddTicks(4547),
+                            Email = "ahmed@domain.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AHMED@DOMAIN.COM",
+                            NormalizedUserName = "AHMED",
+                            PasswordHash = "AQAAAAIAAYagAAAAELTdlJPuHVVC+MDu1TBzHOlCxyA5KVk9DJNQgwau7Kd2+okVHhWxf+xsCgLAyY/bpg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "ahmed"
+                        },
+                        new
+                        {
+                            Id = "NU1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a6cbfe48-0c64-412b-936c-74b73568aecb",
+                            DateOfBirth = new DateTime(1997, 8, 14, 9, 25, 35, 394, DateTimeKind.Utc).AddTicks(6054),
+                            Email = "ayman@domain.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AYMAN@DOMAIN.COM",
+                            NormalizedUserName = "AYMAN",
+                            PasswordHash = "AQAAAAIAAYagAAAAED0C672hrPmFaZ2jdDn/xjgCVLsALr0YalEpkbctlAvict8cX+7eWbRyEgdGvAzdeQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "ayman"
+                        });
                 });
 
             modelBuilder.Entity("NewsApplication.DAL.Models.News", b =>
@@ -294,6 +367,44 @@ namespace NewsApplication.DAL.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("News");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApplicationUserId = "NU1",
+                            Description = "This is a breaking news story.",
+                            DescriptionAr = "هذه قصة إخبارية عاجلة.",
+                            ImageURL = "/images/breaking-news.jpg",
+                            IsDeleted = false,
+                            PublishDate = new DateTime(2024, 8, 4, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6489),
+                            Title = "Breaking News",
+                            TitleAr = "أخبار عاجلة"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ApplicationUserId = "CAU2",
+                            Description = "Latest updates in technology.",
+                            DescriptionAr = "أحدث التحديثات في التكنولوجيا.",
+                            ImageURL = "/images/technology-news.jpg",
+                            IsDeleted = false,
+                            PublishDate = new DateTime(2024, 8, 16, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6512),
+                            Title = "Technology News",
+                            TitleAr = "أخبار التكنولوجيا"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ApplicationUserId = "AU3",
+                            Description = "Latest sports updates.",
+                            DescriptionAr = "آخر التحديثات الرياضية.",
+                            ImageURL = "/images/sports-news.jpg",
+                            IsDeleted = false,
+                            PublishDate = new DateTime(2024, 8, 11, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6514),
+                            Title = "Sports News",
+                            TitleAr = "أخبار الرياضة"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

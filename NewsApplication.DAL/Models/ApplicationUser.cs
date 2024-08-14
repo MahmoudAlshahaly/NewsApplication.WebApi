@@ -12,9 +12,9 @@ namespace NewsApplication.DAL.Models
 {
     public enum UserCategory
     {
-        Normal,
-        ContentAdmin,
-        Admin
+        Normal = 1,
+        ContentAdmin = 2,
+        Admin = 3,
     }
     public class ApplicationUser : IdentityUser
     {

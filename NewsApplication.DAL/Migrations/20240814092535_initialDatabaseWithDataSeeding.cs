@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace NewsApplication.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class initialDatabaseWithDataSeeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +33,6 @@ namespace NewsApplication.DAL.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserCategory = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -206,6 +207,46 @@ namespace NewsApplication.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "AR3", null, "Admin", "ADMIN" },
+                    { "CAR2", null, "ContentAdmin", "CONTENTADMIN " },
+                    { "NR1", null, "Normal", "NORMAL" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "AU3", 0, "39aad86d-6370-4a84-a5ed-2d9e65a9de99", new DateTime(2000, 8, 14, 9, 25, 35, 185, DateTimeKind.Utc).AddTicks(3632), "mahmoud@domain.com", true, false, false, null, "MAHMOUD@DOMAIN.COM", "MAHMOUD", "AQAAAAIAAYagAAAAECPGh2D5kLWCTzTCSY5T+MITtw2SqF0a++f6QCTp3OkImaSFiHyBLkIhfToBN76eCQ==", null, false, "", false, "mahmoud" },
+                    { "CAU2", 0, "eab6c785-a0e4-44de-94b1-0fcfa2ff6eea", new DateTime(1999, 8, 14, 9, 25, 35, 290, DateTimeKind.Utc).AddTicks(4547), "ahmed@domain.com", true, false, false, null, "AHMED@DOMAIN.COM", "AHMED", "AQAAAAIAAYagAAAAELTdlJPuHVVC+MDu1TBzHOlCxyA5KVk9DJNQgwau7Kd2+okVHhWxf+xsCgLAyY/bpg==", null, false, "", false, "ahmed" },
+                    { "NU1", 0, "a6cbfe48-0c64-412b-936c-74b73568aecb", new DateTime(1997, 8, 14, 9, 25, 35, 394, DateTimeKind.Utc).AddTicks(6054), "ayman@domain.com", true, false, false, null, "AYMAN@DOMAIN.COM", "AYMAN", "AQAAAAIAAYagAAAAED0C672hrPmFaZ2jdDn/xjgCVLsALr0YalEpkbctlAvict8cX+7eWbRyEgdGvAzdeQ==", null, false, "", false, "ayman" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "AR3", "AU3" },
+                    { "CAR2", "CAU2" },
+                    { "NR1", "NU1" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "News",
+                columns: new[] { "Id", "ApplicationUserId", "Description", "DescriptionAr", "ImageURL", "IsDeleted", "PublishDate", "Title", "TitleAr" },
+                values: new object[,]
+                {
+                    { 1, "NU1", "This is a breaking news story.", "هذه قصة إخبارية عاجلة.", "/images/breaking-news.jpg", false, new DateTime(2024, 8, 4, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6489), "Breaking News", "أخبار عاجلة" },
+                    { 2, "CAU2", "Latest updates in technology.", "أحدث التحديثات في التكنولوجيا.", "/images/technology-news.jpg", false, new DateTime(2024, 8, 16, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6512), "Technology News", "أخبار التكنولوجيا" },
+                    { 3, "AU3", "Latest sports updates.", "آخر التحديثات الرياضية.", "/images/sports-news.jpg", false, new DateTime(2024, 8, 11, 4, 25, 35, 394, DateTimeKind.Local).AddTicks(6514), "Sports News", "أخبار الرياضة" }
                 });
 
             migrationBuilder.CreateIndex(

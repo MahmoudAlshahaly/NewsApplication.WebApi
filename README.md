@@ -1,5 +1,5 @@
-Documentation
-  Project Architecture with N-Tier Architecure .Net 7
+Documentation 
+  NewsApplication Project Architecture with N-Tier Architecure .Net 7
   
     This project include Postman collection and database script
   

@@ -39,3 +39,28 @@ Documentation
 
      # Tools:
          Use tools like Swagger to automatically generate API documentation.
+         
+    API Endpoints Documentation Login
+    
+    Endpoint: POST /api/Account/LoginAsync
+    Description: Authenticates a user and returns a JWT token.
+
+    Request
+    {
+        "email": "mahmoud@domain.com",
+        "password": "MAHMOUD@123"
+    }
+    
+    Response
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjM2Mjk1ODl9.KvSsp28lQfJYGSkCISisR3FV3s1nW8b3jfrgYO43-kM",
+        "userId": "AU3",
+        "message": "Success",
+        "roles": [
+            "Admin"
+        ],
+        "userName": "mahmoud",
+        "email": "mahmoud@domain.com",
+        "refreshTokenExpiration": "2024-08-15T09:38:13.7034687"
+    }
+

@@ -1,0 +1,1269 @@
+{
+	"info": {
+		"_postman_id": "b56b3edf-3889-4930-8091-ec57cfe86a96",
+		"name": "NewsApplicaiton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20433005"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "RegisterAsync",
+							"item": [
+								{
+									"name": "/api/Account/RegisterAsync",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "ConfirmPassword",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "DateOfBirth",
+													"value": "<date>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Email",
+													"value": "<email>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Password",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "UserCategory",
+													"value": "2",
+													"description": "(Required)  (This can only be one of 1,2,3)",
+													"type": "text"
+												},
+												{
+													"key": "UserName",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/Account/RegisterAsync",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"RegisterAsync"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "ConfirmPassword",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "DateOfBirth",
+															"value": "<date>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "Email",
+															"value": "<email>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "Password",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "UserCategory",
+															"value": "2",
+															"description": "(Required)  (This can only be one of 1,2,3)",
+															"type": "text"
+														},
+														{
+															"key": "UserName",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/RegisterAsync",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														"RegisterAsync"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"token\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"refreshTokenExpiration\": \"<dateTime>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "LoginAsync",
+							"item": [
+								{
+									"name": "/api/Account/LoginAsync",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "Email",
+													"value": "mahmoud@domain.com",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Password",
+													"value": "MAHMOUD@123",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/Account/LoginAsync",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"LoginAsync"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "Email",
+															"value": "<email>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "Password",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/LoginAsync",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														"LoginAsync"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"token\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"refreshTokenExpiration\": \"<dateTime>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/Account/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "DateOfBirth",
+													"value": "<date>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Email",
+													"value": "<email>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "UserName",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Id",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/Account/:id",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "DateOfBirth",
+															"value": "<date>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "Email",
+															"value": "<email>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "UserName",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														},
+														{
+															"key": "Id",
+															"value": "<string>",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"dateOfBirth\": \"<date>\",\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"id\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/Account/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{Url}}/api/Account/:id",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "AddRoleAsync",
+							"item": [
+								{
+									"name": "/api/Account/AddRoleAsync",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "Role",
+													"value": "1",
+													"description": "(Required)  (This can only be one of 1,2,3)",
+													"type": "text"
+												},
+												{
+													"key": "UserId",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/Account/AddRoleAsync",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"AddRoleAsync"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "Role",
+															"value": "1",
+															"description": "(Required)  (This can only be one of 1,2,3)",
+															"type": "text"
+														},
+														{
+															"key": "UserId",
+															"value": "<string>",
+															"description": "(Required) ",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/AddRoleAsync",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														"AddRoleAsync"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "RefreshToken",
+							"item": [
+								{
+									"name": "/api/Account/RefreshToken",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{Url}}/api/Account/RefreshToken",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"RefreshToken"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/RefreshToken",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														"RefreshToken"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "RevokeToken",
+							"item": [
+								{
+									"name": "/api/Account/RevokeToken",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "Token",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/Account/RevokeToken",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"RevokeToken"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "Token",
+															"value": "<string>",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Account/RevokeToken",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Account",
+														"RevokeToken"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "News",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/News/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{Token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{Url}}/api/News/:id",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"News",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/News/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"News",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"titleAr\": \"<string>\",\n  \"description\": \"<string>\",\n  \"descriptionAr\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"imageURL\": \"<string>\",\n  \"isDeleted\": \"<boolean>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/News/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{Token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "Id",
+													"value": "<integer>",
+													"type": "text"
+												},
+												{
+													"key": "Title",
+													"value": "<string>",
+													"type": "text"
+												},
+												{
+													"key": "TitleAr",
+													"value": "<string>",
+													"type": "text"
+												},
+												{
+													"key": "Description",
+													"value": "<string>",
+													"type": "text"
+												},
+												{
+													"key": "DescriptionAr",
+													"value": "<string>",
+													"type": "text"
+												},
+												{
+													"key": "PublishDate",
+													"value": "<date>",
+													"type": "text"
+												},
+												{
+													"key": "Image",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "IsDeleted",
+													"value": "<boolean>",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{Url}}/api/News/:id",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"News",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "Id",
+															"value": "<integer>",
+															"type": "text"
+														},
+														{
+															"key": "Title",
+															"value": "<string>",
+															"type": "text"
+														},
+														{
+															"key": "TitleAr",
+															"value": "<string>",
+															"type": "text"
+														},
+														{
+															"key": "Description",
+															"value": "<string>",
+															"type": "text"
+														},
+														{
+															"key": "DescriptionAr",
+															"value": "<string>",
+															"type": "text"
+														},
+														{
+															"key": "PublishDate",
+															"value": "<date>",
+															"type": "text"
+														},
+														{
+															"key": "Image",
+															"type": "file",
+															"src": []
+														},
+														{
+															"key": "IsDeleted",
+															"value": "<boolean>",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/News/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"News",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"titleAr\": \"<string>\",\n  \"description\": \"<string>\",\n  \"descriptionAr\": \"<string>\",\n  \"publishDate\": \"<date>\",\n  \"image\": \"<binary>\",\n  \"isDeleted\": \"<boolean>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/News/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{Token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{Url}}/api/News/:id",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"api",
+												"News",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/News/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"News",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{Url}}/api/News",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"News"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/News",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"News"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"titleAr\": \"<string>\",\n    \"description\": \"<string>\",\n    \"descriptionAr\": \"<string>\",\n    \"publishDate\": \"<dateTime>\",\n    \"imageURL\": \"<string>\",\n    \"isDeleted\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"titleAr\": \"<string>\",\n    \"description\": \"<string>\",\n    \"descriptionAr\": \"<string>\",\n    \"publishDate\": \"<dateTime>\",\n    \"imageURL\": \"<string>\",\n    \"isDeleted\": \"<boolean>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Description",
+											"value": "<string>",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "DescriptionAr",
+											"value": "<string>",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "Title",
+											"value": "<string>",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "TitleAr",
+											"value": "<string>",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "PublishDate",
+											"value": "<date>",
+											"type": "text"
+										},
+										{
+											"key": "Image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "ApplicationUserId",
+											"value": "<string>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Url}}/api/News",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"api",
+										"News"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "Description",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "DescriptionAr",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "Title",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "TitleAr",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												},
+												{
+													"key": "PublishDate",
+													"value": "<date>",
+													"type": "text"
+												},
+												{
+													"key": "Image",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "ApplicationUserId",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/News",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"News"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"description\": \"<string>\",\n  \"descriptionAr\": \"<string>\",\n  \"title\": \"<string>\",\n  \"titleAr\": \"<string>\",\n  \"publishDate\": \"<date>\",\n  \"image\": \"<binary>\",\n  \"applicationUserId\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
